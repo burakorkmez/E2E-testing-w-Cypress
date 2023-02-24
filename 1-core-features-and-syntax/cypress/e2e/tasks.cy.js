@@ -25,4 +25,25 @@ describe("tasks management", () => {
 		cy.get(".backdrop").should("not.exist");
 		cy.get(".modal").should("not.exist");
 	});
+
+	it("should validate the user input", () => {
+		cy.visit("http://localhost:5173/");
+		cy.contains("Add Task").click();
+		cy.get(".modal").contains("Add Task").click();
+		cy.contains("Please provide values");
+	});
+
+	it("should filter tasks", () => {
+		cy.visit("http://localhost:5173/");
+		cy.contains("Add Task").click();
+		cy.get("#title").type("My new task");
+		cy.get("#summary").type("My new task summary");
+		cy.get("#category").select("urgent");
+		cy.get(".modal").contains("Add Task").click();
+		cy.get(".task").should("have.length", 1);
+		cy.get("#filter").select("urgent");
+		cy.get(".task").should("have.length", 1);
+		cy.get("#filter").select("all");
+		cy.get(".task").should("have.length", 1);
+	});
 });
