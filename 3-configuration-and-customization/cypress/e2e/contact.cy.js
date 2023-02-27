@@ -24,7 +24,7 @@ describe("contact form", () => {
 		cy.get("[data-cy='contact-input-email']").type("test@example.com");
 		// cy.get("[data-cy='contact-input-email']").type("test@example.com{enter}"); // submitting with enter key
 		cy.get("[data-cy='contact-btn-submit']").contains("Send Message").should("not.have.attr", "disabled");
-		cy.get("[data-cy='contact-btn-submit']").click();
+		cy.submitForm();
 		cy.get("[data-cy='contact-btn-submit']").contains("Sending...").and("have.attr", "disabled");
 		// and is alias for .should. It makes more readable code
 		// cy.get("[data-cy='contact-btn-submit']").contains("Sending...").should("have.attr", "disabled");
@@ -42,7 +42,7 @@ describe("contact form", () => {
 
 	it("should validate the form input", () => {
 		// cy.visit("/about");
-		cy.get('[data-cy="contact-btn-submit"]').click();
+		cy.submitForm();
 		cy.get('[data-cy="contact-btn-submit"]').then(($btn) => {
 			expect($btn).to.not.have.attr("disabled");
 			expect($btn.text()).to.not.equal("Sending...");
