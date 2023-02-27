@@ -2,7 +2,7 @@
 
 describe("page navigation", () => {
 	it("should navigate between pages", () => {
-		cy.visit("http://localhost:5173/");
+		cy.visit("/");
 		// instead of class, id and element selectors we can use data-cy attributes as it is more reliable and less prone to change
 		cy.get("[data-cy='header-about-link']").click();
 		cy.location("pathname").should("eq", "/about");

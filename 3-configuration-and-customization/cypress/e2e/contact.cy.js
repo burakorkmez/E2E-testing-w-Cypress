@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 describe("contact form", () => {
 	it("should submit the form", () => {
-		cy.visit("http://localhost:5173/about");
+		cy.visit("/about");
 		cy.get("[data-cy='contact-input-message']").type("Hello, Cypress!");
 		cy.get("[data-cy='contact-input-name']").type("John Doe");
 		cy.get("[data-cy='contact-input-email']").type("test@example.com");
