@@ -1,7 +1,24 @@
 /// <reference types="cypress" />
 describe("contact form", () => {
-	it("should submit the form", () => {
+	before(() => {
+		// Runs only once,before all tests
+	});
+	beforeEach(() => {
+		// Runs before every test (i.e., it's repeated)
 		cy.visit("/about");
+	});
+
+	// after and afterEach can be used to do the clean up work but it is not recommended. Instead do the all initializations and all clean up work in before and beforeEach hooks
+	after(() => {
+		// Runs after all tests, only once
+	});
+
+	afterEach(() => {
+		// Runs after every test
+	});
+
+	it("should submit the form", () => {
+		// cy.visit("/about");
 		cy.get("[data-cy='contact-input-message']").type("Hello, Cypress!");
 		cy.get("[data-cy='contact-input-name']").type("John Doe");
 		cy.get("[data-cy='contact-input-email']").type("test@example.com");
@@ -24,7 +41,7 @@ describe("contact form", () => {
 	});
 
 	it("should validate the form input", () => {
-		cy.visit("http://localhost:5173/about");
+		// cy.visit("/about");
 		cy.get('[data-cy="contact-btn-submit"]').click();
 		cy.get('[data-cy="contact-btn-submit"]').then(($btn) => {
 			expect($btn).to.not.have.attr("disabled");
